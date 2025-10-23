@@ -2,6 +2,8 @@
 #Primeros pasos con pandas
 
 from data.listasSimuladas import generar_ventas
+from notebook.graficarBarras import generarBarra
+from notebook.generarReportes import crearTabla
 import pandas as pd
 
 datos_simulados=generar_ventas(1000)
@@ -39,6 +41,8 @@ tablaOrdenada=pd.DataFrame(datos_simulados)
 #PROFE
 #Yo puedo obtener de los datos las ventas realizadas en enero de 2025?
 queryUno=tablaOrdenada.query("fecha >= '2025-01-01' and fecha <= '2025-01-31' ")
+crearTabla(queryUno,"reportes/tablaUno.html","Ventas de enero",200)
+
 #Yo como adminsitrador del PV puedo ver la cantidad mayor o iguales 3?
 queryDos=tablaOrdenada.query("cantidad >= 3")
 #Yo como administrador del PV puedo ver cuales fueron las ventas del producto JEAN AJUSTADO
@@ -76,6 +80,16 @@ queryDiez=tablaOrdenada.query("fecha >= '2025-01-01' and fecha <= '2025-01-31' "
 
 #GRAFICAS A GENERAR
 #total de ventas por producto
+generarBarra(tablaOrdenada,"producto","total","Ventas totales por producto")
 #total de ventas con cantidad >=3
+filtroUno=tablaOrdenada.query("cantidad >= 3")
+generarBarra(filtroUno,"producto","total","Ventas > 3 productos")
 #total de ventas por vendedor
+generarBarra(tablaOrdenada,"vendedor","total","Desempeño de vendedores en la tienda san diego")
+
+#ESTE QUEDA DE TAREA (buscar como guardar)
 #total de ventas de productos caros (>400k)
+#GRAFICAR LAS VENTAS DE ENERO
+#GRAFICAR LAS VENTAS DE JEANS AJUSTADOS POR VENDEDOR
+#UNIDADES VENDIDADAS DE TALLA XL
+#PROPONEME UNA GRAFICA 
